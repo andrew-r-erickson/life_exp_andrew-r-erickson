@@ -9,10 +9,27 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+```{r}
+library(tidyverse)
+library(gapminder)
+data("gapminder_unfiltered")
+```
+
 
 # Abstract 
 
 Here, I reexamine the analysis of Oeppen and Vaupel (2002). 
 
 # Analysis 
+
+Here, we create a data frame that contains only the maximum life expectancy and the corresponding country for each year in the gapminder_unfiltered data set. 
+
+```{r}
+gapminder_unfiltered |>
+  group_by(year) |>
+  filter(lifeExp == max(lifeExp)) |>
+  ungroup() |>
+  select(year, country, lifeExp) |>
+  arrange(year) -> sumdat
+```
 
